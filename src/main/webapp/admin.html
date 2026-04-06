@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/fev.png" type="image/png" />
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="home1.min.css">
+    <link rel="stylesheet" href="home.min.css">
+    <link rel="stylesheet" href="home1.css">
+
+    <!-- Font Awesome & Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        /* Background Image */
+        body {
+            background: url('images/5.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white; /* Ensures text is visible on the background */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent navbar */
+        }
+
+        /* Content Box */
+        .container {
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="images/fev.png" alt="Logo" style="height:30px;">
+                </a>
+                <a class="navbar-brand" href="#">Admin Dashboard</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="view_consumers.jsp"><i class="fa fa-users"></i> View All Consumers</a></li>
+                <li><a href="view_distributors.jsp"><i class="fa fa-truck"></i> View All Distributors</a></li>
+                <li><a href="manage_distributor.jsp"><i class="fa fa-plus"></i> Manages Distributor</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="home.html" onclick="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Welcome, Admin!</h2>
+        <p>Manage distributors and consumers from here.</p>
+        
+        <!-- Images -->
+        <div class="row">
+            <div class="col-md-4">
+                <img src="images/1.jpg" class="img-responsive img-thumbnail" alt="Image 1">
+            </div>
+            <div class="col-md-4">
+                <img src="images/2.jpg" class="img-responsive img-thumbnail" alt="Image 2">
+            </div>
+            <div class="col-md-4">
+                <img src="images/3.jpg" class="img-responsive img-thumbnail" alt="Image 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Script -->
+   <script>
+    function logout() {
+        // Clear session storage and local storage
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // Clear cookies
+        document.cookie.split(";").forEach(function(c) { 
+            document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+        });
+
+        // Prevent back button from accessing previous pages
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function () {
+            window.history.go(1);
+        };
+
+        // Redirect to home page
+        window.location.href = "home.html";
+    }
+
+    // Prevent back button after logout
+    window.onload = function() {
+        if (performance.navigation.type === 2) { // Check if navigation was done via back/forward button
+            location.replace("home.html"); // Redirect to home page
+        }
+    };
+</script>
+
+
+
+</body>
+</html>
